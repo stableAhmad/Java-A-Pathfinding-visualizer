@@ -408,7 +408,7 @@ public class pathfinding_main
 					}
 					if(validNeighbor(currentRow-1 , currentCol)) // if up exists
 					{
-						System.out.println("forth condition");
+						System.out.println("fourth condition");
 						if(!barriers.contains(grid[currentRow-1][currentCol].rect)) // if its not a barrier
 						{
 							

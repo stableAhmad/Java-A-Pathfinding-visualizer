@@ -297,7 +297,7 @@ public class pathfinding_main
 			}
 			catch(Exception exce)
 			{
-				System.out.println("ljdlawjd");
+				System.out.println("exception");
 			}
 			
 			if(!current.equals(s))

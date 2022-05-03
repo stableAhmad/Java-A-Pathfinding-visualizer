@@ -1,6 +1,6 @@
 /*
 edge cases
--start cell and edge cell can be the same cell (not handled)
+-start cell and end cell can be the same cell (not handled)
 -start or end cell can be chosen as barrier cell (not handled)
 */
 import java.util.concurrent.TimeUnit;
@@ -280,179 +280,19 @@ public class pathfinding_main
 					int newFirstScore = current.firstScore+1;
 
 					
-					if(validNeighbor(currentRow , currentCol+1)) // if right exists
-					{
-						
-						
-						if(!barriers.contains(grid[currentRow][currentCol+1].rect)) // if its not a barrier
-						{
-							
-							
-								
-								if(newFirstScore < grid[currentRow][currentCol+1].firstScore )
-								{
-									
-									if(PQ.contains( grid[currentRow][currentCol+1]))
-								{
-									PQ.remove(grid[currentRow][currentCol+1]);
-								}
-									grid[currentRow][currentCol+1].path.clear();
-									for(int i = 0 ; i <current.path.size() ; i++)
-								{
-									grid[currentRow][currentCol+1].path.add(current.path.get(i));
-								}
-								grid[currentRow][currentCol+1].path.add(current.rect);
-								
-								
-								grid[currentRow][currentCol+1].firstScore = current.firstScore+1;
-								grid[currentRow][currentCol+1].secondScore = secondScore((int)(grid[currentRow][currentCol+1].rect.getX()) , (int)(grid[currentRow][currentCol+1].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
-								grid[currentRow][currentCol+1].totalScore = grid[currentRow][currentCol+1].firstScore + grid[currentRow][currentCol+1].secondScore;
-								
-								if(grid[currentRow][currentCol+1].equals(e))
-									{
-										found = true;
-										finishAlg(grid[currentRow][currentCol+1].path , g2d );
-										break;
-									}else
-									{
-										g2d.setColor(new Color(235,117,0));
-										g2d.fill(grid[currentRow][currentCol+1].rect);
-										PQ.add(grid[currentRow][currentCol+1]);
-									}
-								} 
-								
-								
-							
-						}
-					}
 					
-					if(validNeighbor(currentRow , currentCol-1)) // if left exists
-					{
-						System.out.println("second condition");
-						if(!barriers.contains(grid[currentRow][currentCol-1].rect)) // if its not a barrier
-						{
-							
-							if(newFirstScore < grid[currentRow][currentCol-1].firstScore )//!considered.contains(grid[currentRow][currentCol-1]))
-							{
-								
-								if(PQ.contains( grid[currentRow][currentCol-1]))
-								{
-									PQ.remove(grid[currentRow][currentCol-1]);
-								}
-								
-								
-								grid[currentRow][currentCol-1].path.clear();
-								for(int i = 0 ; i <current.path.size() ; i++)
-								{
-									grid[currentRow][currentCol-1].path.add(current.path.get(i));
-								}
-								grid[currentRow][currentCol-1].path.add(current.rect);
-								
-								grid[currentRow][currentCol-1].firstScore = current.firstScore+1;
-								grid[currentRow][currentCol-1].secondScore = secondScore((int)(grid[currentRow][currentCol-1].rect.getX()) , (int)(grid[currentRow][currentCol-1].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
-								grid[currentRow][currentCol-1].totalScore = grid[currentRow][currentCol-1].firstScore + grid[currentRow][currentCol-1].secondScore;
-								
-								if(grid[currentRow][currentCol-1].equals(e))
-									{
-										found = true;
-										finishAlg(grid[currentRow][currentCol-1].path , g2d );
-										break;
-									}else
-									{
-										g2d.setColor(new Color(235,117,0));
-										g2d.fill(grid[currentRow][currentCol-1].rect);
-										PQ.add(grid[currentRow][currentCol-1]);
-									}
-							} 
-						}
-					}
-					if(validNeighbor(currentRow+1 , currentCol)) // if down exists
-					{
-						System.out.println("third condition");
-						
-						if(!barriers.contains(grid[currentRow+1][currentCol].rect)) // if its not a barrier
-						{
-							
-							if(newFirstScore < grid[currentRow+1][currentCol].firstScore )//!considered.contains(grid[currentRow+1][currentCol]))
-							{
-								if(PQ.contains( grid[currentRow+1][currentCol]))
-								{
-									PQ.remove(grid[currentRow+1][currentCol]);
-								}
-								
-								grid[currentRow+1][currentCol].path.clear();
-								for(int i = 0 ; i <current.path.size() ; i++)
-								{
-									grid[currentRow+1][currentCol].path.add(current.path.get(i));
-								}
-								grid[currentRow+1][currentCol].path.add(current.rect);
-								
-								grid[currentRow+1][currentCol].firstScore = current.firstScore+1;
-								grid[currentRow+1][currentCol].secondScore = secondScore((int)(grid[currentRow+1][currentCol].rect.getX()) , (int)(grid[currentRow+1][currentCol].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
-								grid[currentRow+1][currentCol].totalScore = grid[currentRow+1][currentCol].firstScore + grid[currentRow+1][currentCol].secondScore;
-								
-								if(grid[currentRow+1][currentCol].equals(e))
-									{
-										found = true;
-										finishAlg(grid[currentRow+1][currentCol].path , g2d );
-										break;
-									}else
-									{
-										g2d.setColor(new Color(235,117,0));
-										g2d.fill(grid[currentRow+1][currentCol].rect);
-										PQ.add(grid[currentRow+1][currentCol]);
-									}
-							} 
-								
-						}
-					}
-					if(validNeighbor(currentRow-1 , currentCol)) // if up exists
-					{
-						System.out.println("fourth condition");
-						if(!barriers.contains(grid[currentRow-1][currentCol].rect)) // if its not a barrier
-						{
-							
-							if(newFirstScore < grid[currentRow-1][currentCol].firstScore )//!considered.contains(grid[currentRow-1][currentCol]))
-							{
-								
-								if(PQ.contains( grid[currentRow-1][currentCol]))
-								{
-									PQ.remove(grid[currentRow-1][currentCol]);
-								}
-								
-								grid[currentRow-1][currentCol].path.clear();
-								
-								for(int i = 0 ; i <current.path.size() ; i++)
-								{
-									grid[currentRow-1][currentCol].path.add(current.path.get(i));
-								}
-								grid[currentRow-1][currentCol].path.add(current.rect);
-								
-								grid[currentRow-1][currentCol].firstScore = current.firstScore+1;
-								grid[currentRow-1][currentCol].secondScore = secondScore((int)(grid[currentRow-1][currentCol].rect.getX()) , (int)(grid[currentRow-1][currentCol].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
-								grid[currentRow-1][currentCol].totalScore = grid[currentRow-1][currentCol].firstScore + grid[currentRow-1][currentCol].secondScore;
-								
-								if(grid[currentRow-1][currentCol].equals(e))
-									{
-										found = true;
-										finishAlg(grid[currentRow-1][currentCol].path , g2d );
-										break;
-									}else
-									{
-										g2d.setColor(new Color(235,117,0));
-										g2d.fill(grid[currentRow-1][currentCol].rect);
-										PQ.add(grid[currentRow-1][currentCol]);
-									}
-							}
-						}
+					if( handleNeighbor(currentRow ,currentCol-1 , g2d , newFirstScore , PQ , current , found ,  e) )break;
 					
-					}
-				
+					if(handleNeighbor(currentRow ,currentCol+1 , g2d , newFirstScore , PQ , current , found,  e) )break;
+					
+					if(handleNeighbor(currentRow+1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
+					
+					if(handleNeighbor(currentRow-1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
 						
 						
 			try
 			{
-				TimeUnit.MILLISECONDS.sleep(20);
+				TimeUnit.MILLISECONDS.sleep(0);
 				
 			}
 			catch(Exception exce)
@@ -497,6 +337,52 @@ public class pathfinding_main
 			{
 				return true;
 			}else return false;
+		}
+		
+		public static boolean handleNeighbor(int row , int col  , Graphics2D g2d , int newFirstScore , PriorityQueue < Node> PQ , Node current , boolean found , Node e)
+		{
+			if(validNeighbor(row, col)) // if up exists
+					{
+						
+						if(!barriers.contains(grid[row][col].rect)) // if its not a barrier
+						{
+							
+							if(newFirstScore < grid[row][col].firstScore )//!considered.contains(grid[currentRow-1][currentCol]))
+							{
+								
+								if(PQ.contains( grid[row][col]))
+								{
+									PQ.remove(grid[row][col]);
+								}
+								
+								grid[row][col].path.clear();
+								
+								for(int i = 0 ; i <current.path.size() ; i++)
+								{
+									grid[row][col].path.add(current.path.get(i));
+								}
+								grid[row][col].path.add(current.rect);
+								
+								grid[row][col].firstScore = current.firstScore+1;
+								grid[row][col].secondScore = secondScore((int)(grid[row][col].rect.getX()) , (int)(grid[row][col].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
+								grid[row][col].totalScore = grid[row][col].firstScore + grid[row][col].secondScore;
+								
+								if(grid[row][col].equals(e))
+									{
+										found = true;
+										finishAlg(grid[row][col].path , g2d );
+										
+									}else
+									{
+										g2d.setColor(new Color(235,117,0));
+										g2d.fill(grid[row][col].rect);
+										PQ.add(grid[row][col]);
+									}
+							}
+						}
+					
+					}
+					return found;
 		}
 	
 }

@@ -277,7 +277,7 @@ public class pathfinding_main
 					
 					System.out.println(currentRow+" "+currentCol);
 					
-					int newFirstScore = current.firstScore+1;
+					int newFirstScore = current.firstScore+10;
 
 					
 					
@@ -363,7 +363,7 @@ public class pathfinding_main
 								}
 								grid[row][col].path.add(current.rect);
 								
-								grid[row][col].firstScore = current.firstScore+1;
+								grid[row][col].firstScore = current.firstScore+10;
 								grid[row][col].secondScore = secondScore((int)(grid[row][col].rect.getX()) , (int)(grid[row][col].rect.getY()) ,(int) (e.rect.getX() ),(int)( e.rect.getY()));
 								grid[row][col].totalScore = grid[row][col].firstScore + grid[row][col].secondScore;
 								

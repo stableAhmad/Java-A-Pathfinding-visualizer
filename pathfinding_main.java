@@ -297,7 +297,7 @@ public class pathfinding_main
 			}
 			catch(Exception exce)
 			{
-				System.out.println("exception");
+				System.out.println("exception found");
 			}
 			
 			if(!current.equals(s))
@@ -414,6 +414,7 @@ class Node implements Comparable<Node>
 				return 1;
 			}else if(n.secondScore > this.secondScore) return -1;
 			else return 0;
+			
 			
 		}
 		else if(this.totalScore > n.totalScore)return 1;

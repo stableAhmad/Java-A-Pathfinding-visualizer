@@ -1,0 +1,3 @@
+start cell and end cell can be chosen as barrier
+
+choose appropriate sleep time

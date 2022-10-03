@@ -39,7 +39,7 @@ public class pathfinding_main
 	static int bar_height = 30; // used inside the mouse listener class
 
 	
-    static Node grid [][] = new Node[cells_number-2][cells_number];
+	static Node grid [][] = new Node[cells_number-2][cells_number];
 	static Rectangle startRect , endRect;
 	static Color red ;
 	
@@ -81,8 +81,8 @@ public class pathfinding_main
 		window_width += 17 ;
 		window_height += 15*2 ;
 
-	
-		//initing the grid
+
+		
 		init_grid(grid);
 
 		
@@ -196,11 +196,11 @@ public class pathfinding_main
 				if(setStartOnClick)
 				{
 					
-						Graphics2D g2d = (Graphics2D)container.getGraphics();
-						g2d.setColor(startColor);
-						g2d.fill(grid[row][col].rect);
-						startRectangle = grid[row][col];
-						setStartOnClick = false;
+					Graphics2D g2d = (Graphics2D)container.getGraphics();
+					g2d.setColor(startColor);
+					g2d.fill(grid[row][col].rect);
+					startRectangle = grid[row][col];
+					setStartOnClick = false;
 					
 				}else if(setGoalOnClick )
 				{
@@ -241,12 +241,12 @@ public class pathfinding_main
 		
 		WIN.addMouseListener(adapter);
 		WIN.addMouseMotionListener(mma);
-	
+
 		
 		
 	}
-		private static void algoStart(Graphics2D g2d , Node s , Node e , HashSet<Rectangle> barriers)
-		{
+	private static void algoStart(Graphics2D g2d , Node s , Node e , HashSet<Rectangle> barriers)
+	{
 			PriorityQueue<Node> PQ = new PriorityQueue<>();  // poll add peek remove iterator = pq.iterator and hasNext
 			HashSet<Node> considered  = new HashSet<>();
 			
@@ -263,51 +263,51 @@ public class pathfinding_main
 			while( ! PQ.isEmpty())
 			{
 				if(iteration == 500 ) break;
-					
-					Node current = PQ.poll();
-					if(!current.equals(s))
-					{
-						g2d.setColor(new Color(228 , 0 , 0));
-						g2d.fill(current.rect);
-					}
-					considered.add(current);
-					int currentCol = (int)(current.rect.getX())/20;
-					int currentRow  = (int)(current.rect.getY()-30)/20;
-					
-					
-					System.out.println(currentRow+" "+currentCol);
-					
-					int newFirstScore = current.firstScore+10;
 
-					
-					
-					if( handleNeighbor(currentRow ,currentCol-1 , g2d , newFirstScore , PQ , current , found ,  e) )break;
-					
-					if(handleNeighbor(currentRow ,currentCol+1 , g2d , newFirstScore , PQ , current , found,  e) )break;
-					
-					if(handleNeighbor(currentRow+1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
-					
-					if(handleNeighbor(currentRow-1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
-						
-						
-			try
-			{
-				TimeUnit.MILLISECONDS.sleep(0);
-				
-			}
-			catch(Exception exce)
-			{
-				System.out.println("exception found");
-			}
-			
-			if(!current.equals(s))
-						  	{
-								g2d.setColor(new Color(235,117,0));
-								g2d.fill(current.rect);
-							}
-						System.out.println("");	
-						System.out.println("");	
-			
+				Node current = PQ.poll();
+				if(!current.equals(s))
+				{
+					g2d.setColor(new Color(228 , 0 , 0));
+					g2d.fill(current.rect);
+				}
+				considered.add(current);
+				int currentCol = (int)(current.rect.getX())/20;
+				int currentRow  = (int)(current.rect.getY()-30)/20;
+
+
+				System.out.println(currentRow+" "+currentCol);
+
+				int newFirstScore = current.firstScore+10;
+
+
+
+				if( handleNeighbor(currentRow ,currentCol-1 , g2d , newFirstScore , PQ , current , found ,  e) )break;
+
+				if(handleNeighbor(currentRow ,currentCol+1 , g2d , newFirstScore , PQ , current , found,  e) )break;
+
+				if(handleNeighbor(currentRow+1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
+
+				if(handleNeighbor(currentRow-1 ,currentCol , g2d , newFirstScore , PQ , current , found,  e) )break;
+
+
+				try
+				{
+					TimeUnit.MILLISECONDS.sleep(0);
+
+				}
+				catch(Exception exce)
+				{
+					System.out.println("exception found");
+				}
+
+				if(!current.equals(s))
+				{
+					g2d.setColor(new Color(235,117,0));
+					g2d.fill(current.rect);
+				}
+				System.out.println("");	
+				System.out.println("");	
+
 
 			}
 			
@@ -342,8 +342,8 @@ public class pathfinding_main
 		public static boolean handleNeighbor(int row , int col  , Graphics2D g2d , int newFirstScore , PriorityQueue < Node> PQ , Node current , boolean found , Node e)
 		{
 			if(validNeighbor(row, col)) // if up exists
-					{
-						
+			{
+
 						if(!barriers.contains(grid[row][col].rect)) // if its not a barrier
 						{
 							
@@ -368,108 +368,108 @@ public class pathfinding_main
 								grid[row][col].totalScore = grid[row][col].firstScore + grid[row][col].secondScore;
 								
 								if(grid[row][col].equals(e))
-									{
-										found = true;
-										finishAlg(grid[row][col].path , g2d );
-										
-									}else
-									{
-										g2d.setColor(new Color(235,117,0));
-										g2d.fill(grid[row][col].rect);
-										PQ.add(grid[row][col]);
-									}
+								{
+									found = true;
+									finishAlg(grid[row][col].path , g2d );
+
+								}else
+								{
+									g2d.setColor(new Color(235,117,0));
+									g2d.fill(grid[row][col].rect);
+									PQ.add(grid[row][col]);
+								}
 							}
 						}
-					
+
 					}
 					return found;
-		}
-	
-}
+				}
 
-class Node implements Comparable<Node>
-{
-	Rectangle rect;
-	ArrayList<Rectangle> path = new ArrayList<>();
-	int firstScore;
-	int secondScore;
-	int totalScore;
-	
-	Node(){}
-	
-	Node(int f , int s , int t , Rectangle r)
-	{
-		this.firstScore = f;
-		this.secondScore = s;
-		this.totalScore = t;
-		this.rect = r;
-	}
-	
-	 @Override
-    public int compareTo(Node n) {
-        if(this.totalScore == n.totalScore)
-		{
-			if(this.secondScore > n.secondScore)
-			{
-				return 1;
-			}else if(n.secondScore > this.secondScore) return -1;
-			else return 0;
-			
-			
-		}
-		else if(this.totalScore > n.totalScore)return 1;
-		else return -1;
-    }
-	
-}
-
-
-
-
-
-
-class Window extends JFrame
-{
-	
-	Window(String name )
-	{
-		super(name);
-		
-	}
-	
-}
-
-
-class winContainer extends JComponent
-{
-	Node [][] grid ;
-	
-	
-	
-	winContainer(Node [][] grid, int w , int h)
-	{
-		this.grid = grid;
-		this.setSize(w,h);
-	}
-	public void paintComponent(Graphics g)
-	{
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D)g;
-		drawGrid(grid,g2d);
-			
-		
-	}
-	public void drawGrid(Node[][] grid , Graphics2D g2d)
-	{
-		for(Node[] row : grid)
-		{
-			for(Node node : row)
-			{
-				g2d.draw(node.rect);
 			}
-		}
-	}
-	
-}
+
+			class Node implements Comparable<Node>
+			{
+				Rectangle rect;
+				ArrayList<Rectangle> path = new ArrayList<>();
+				int firstScore;
+				int secondScore;
+				int totalScore;
+
+				Node(){}
+
+				Node(int f , int s , int t , Rectangle r)
+				{
+					this.firstScore = f;
+					this.secondScore = s;
+					this.totalScore = t;
+					this.rect = r;
+				}
+
+				@Override
+				public int compareTo(Node n) {
+					if(this.totalScore == n.totalScore)
+					{
+						if(this.secondScore > n.secondScore)
+						{
+							return 1;
+						}else if(n.secondScore > this.secondScore) return -1;
+						else return 0;
+
+
+					}
+					else if(this.totalScore > n.totalScore)return 1;
+					else return -1;
+				}
+
+			}
+
+
+
+
+
+
+			class Window extends JFrame
+			{
+
+				Window(String name )
+				{
+					super(name);
+
+				}
+
+			}
+
+
+			class winContainer extends JComponent
+			{
+				Node [][] grid ;
+
+
+
+				winContainer(Node [][] grid, int w , int h)
+				{
+					this.grid = grid;
+					this.setSize(w,h);
+				}
+				public void paintComponent(Graphics g)
+				{
+					super.paintComponent(g);
+					Graphics2D g2d = (Graphics2D)g;
+					drawGrid(grid,g2d);
+
+
+				}
+				public void drawGrid(Node[][] grid , Graphics2D g2d)
+				{
+					for(Node[] row : grid)
+					{
+						for(Node node : row)
+						{
+							g2d.draw(node.rect);
+						}
+					}
+				}
+
+			}
 
 

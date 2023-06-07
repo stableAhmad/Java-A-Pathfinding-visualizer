@@ -2,5 +2,5 @@
 
 
 <p align="center">
-<img src="./demo/pathfinding.gif" width="200%" />
+<img src="./demo/pathfindingGif.gif" width="100%" />
 </p>
